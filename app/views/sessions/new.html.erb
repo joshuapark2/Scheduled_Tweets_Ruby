@@ -1,0 +1,16 @@
+<h1>Sign In</h1>
+
+<%= form_with url: sign_in_path, scope: :session do |form| %>
+  <div class="mb-3">
+    <%= form.label :email %>
+    <%= form.text_field :email, class: "form-control", placeholder: "john@doe.com", autocomplete: "email" %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :password %>
+    <%= form.password_field :password, class: "form-control", placeholder: "password", autocomplete: "new-password" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.submit "Sign In", class: "btn btn-primary" %>
+  </div>
+<% end %>
