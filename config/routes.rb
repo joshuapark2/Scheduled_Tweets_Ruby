@@ -16,5 +16,8 @@ Rails.application.routes.draw do
 
   get "about-us", to: "about#index", as: :about
 
+  get "sign-up", to: "registrations#new"
+  post "sign-up", to: "registrations#create"
+
   root to: "main#index"
 end
