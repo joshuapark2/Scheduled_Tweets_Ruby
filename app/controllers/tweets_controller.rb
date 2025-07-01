@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   before_action :require_user_logged_in!
-  before_action :set_tweet, only: [:edit, :update, :destroy]
+  before_action :set_tweet, only: [:edit, :update, :destroy, :destroy_on_twitter]
 
   def index
     @tweets = Current.user.tweets
@@ -35,6 +35,14 @@ class TweetsController < ApplicationController
     @tweet.destroy
     redirect_to tweets_path, notice: "Tweet was unscheduled."
   end
+
+  def destroy_on_twitter
+    @tweet = Current.user.tweets.find(params[:id])
+    @tweet.delete_from_twitter!
+
+    redirect_to tweets_path, notice: "Tweet was deleted from Twitter."
+  end
+
 
   private
 

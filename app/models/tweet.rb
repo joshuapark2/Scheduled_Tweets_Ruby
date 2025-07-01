@@ -12,7 +12,7 @@ class Tweet < ApplicationRecord
 
   after_save_commit do
     if publish_at_previously_changed?
-      TweetJob.set(wait_util: publish_at).perform_later(self)
+      TweetJob.set(wait_until: publish_at).perform_later(self)
     end
   end
 
@@ -24,5 +24,13 @@ class Tweet < ApplicationRecord
     response = twitter_account.client.post("tweets", { text: body }.to_json)
     update!(tweet_id: response["data"]["id"])
   end
+
+  def delete_from_twitter!
+    return unless published?
+
+    twitter_account.client.delete("tweets/#{tweet_id}")
+    update!(tweet_id: nil) # clear the local reference if deleted
+  end
+
 
 end
