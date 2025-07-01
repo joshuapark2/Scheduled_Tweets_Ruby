@@ -74,4 +74,6 @@ Rails.application.configure do
 
   config.hosts << "04f2-2600-1700-5ea0-1850-f180-fbee-cc1d-f8fc.ngrok-free.app"
   config.hosts << /.*\.ngrok-free\.app/
+
+  config.active_job.queue_adapter = :sidekiq
 end
