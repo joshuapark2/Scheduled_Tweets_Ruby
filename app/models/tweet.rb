@@ -10,4 +10,8 @@ class Tweet < ApplicationRecord
 
   end
 
+  def published?
+    tweet_id?
+  end
+
 end
