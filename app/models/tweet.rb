@@ -10,6 +10,12 @@ class Tweet < ApplicationRecord
 
   end
 
+  after_save_commit do
+    if publish_at_previously_changed?
+      TweetJob.set(wait_util: publish_at).perform_later(self)
+    end
+  end
+
   def published?
     tweet_id?
   end
@@ -18,7 +24,5 @@ class Tweet < ApplicationRecord
     response = twitter_account.client.post("tweets", { text: body }.to_json)
     update!(tweet_id: response["data"]["id"])
   end
-
-
 
 end
