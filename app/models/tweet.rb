@@ -14,4 +14,11 @@ class Tweet < ApplicationRecord
     tweet_id?
   end
 
+  def publish_to_twitter!
+    response = twitter_account.client.post("tweets", { text: body }.to_json)
+    update!(tweet_id: response["data"]["id"])
+  end
+
+
+
 end
