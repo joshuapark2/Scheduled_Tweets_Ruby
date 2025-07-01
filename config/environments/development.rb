@@ -71,4 +71,7 @@ Rails.application.configure do
   # config.generators.apply_rubocop_autocorrect_after_generate!
 
   config.action_mailer.default_url_options = { host: "localhost:3000" }
+
+  config.hosts << "04f2-2600-1700-5ea0-1850-f180-fbee-cc1d-f8fc.ngrok-free.app"
+  config.hosts << /.*\.ngrok-free\.app/
 end
